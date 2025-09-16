@@ -1,0 +1,2 @@
+- [uv](https://docs.astral.sh/uv/guides/install-python/) for package management
+- [Typst](https://typst.app/) for the writeup
