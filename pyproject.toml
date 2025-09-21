@@ -14,4 +14,5 @@ dependencies = [
     "scipy",
     "jupyter",
     "notebook",
+    "ucimlrepo>=0.0.7",
 ]
