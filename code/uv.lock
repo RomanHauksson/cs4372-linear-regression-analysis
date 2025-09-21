@@ -1,7 +1,0 @@
-version = 1
-requires-python = ">=3.11"
-
-[[package]]
-name = "cs4372-linear-regression-analysis"
-version = "0.1.0"
-source = { virtual = "." }
