@@ -1,0 +1,17 @@
+[project]
+name = "cs4372-linear-regression-analysis"
+version = "0.1.0"
+description = "Project 1 - Linear Regression Analysis"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "pandas",
+    "numpy",
+    "scikit-learn",
+    "statsmodels",
+    "seaborn",
+    "matplotlib",
+    "scipy",
+    "jupyter",
+    "notebook",
+]

@@ -1,0 +1,18 @@
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Editor/OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/*
+
+# Typst cache (keeps PDFs tracked)
+.typst/
+
