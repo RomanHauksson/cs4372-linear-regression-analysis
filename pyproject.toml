@@ -15,4 +15,6 @@ dependencies = [
     "jupyter",
     "notebook",
     "ucimlrepo>=0.0.7",
+    "tqdm",
+    "requests>=2.32.5",
 ]
