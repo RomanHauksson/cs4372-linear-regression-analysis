@@ -6,22 +6,25 @@ Project: Linear Regression Analysis
 ## Assignment TODO (Strict per Instructions)
 
 ### 1) Project and Dataset Selection
-- [ ] Choose a dataset from the UCI ML repository (https://archive.ics.uci.edu/ml/datasets.php) with Default Task = Regression
-- [ ] Read the dataset description to understand variables
-- [ ] Identify the predicted variable (target) and predictor (independent) variables
-- [ ] Store the dataset at a public URL (e.g., GitHub/AWS); do not submit the dataset file
+- [x] Choose a dataset from the UCI ML repository (https://archive.ics.uci.edu/ml/datasets.php) with Default Task = Regression
+- [x] Read the dataset description to understand variables
+- [x] Identify the predicted variable (target) and predictor (independent) variables
+- [x] Store the dataset at a public URL (e.g., GitHub/AWS); do not submit the dataset file
+  - **Selected:** Combined Cycle Power Plant Dataset
+  - **Target:** PE (power_output) - Net hourly electrical energy output
+  - **Features:** AT (ambient_temp), V (vacuum), AP (ambient_pressure), RH (relative_humidity)
 
 ### 2) Regression Model Building
 
 #### 2.1 Pre‑Processing
-- [ ] Load data into a pandas DataFrame from a public URL (remember to use public URLs to read the file)
-- [ ] Check for null values, missing data, and inconsistencies; handle them
-- [ ] Examine attributes and the target; convert categorical attributes to numeric if needed
-- [ ] Output summaries of the attributes; note whether attributes are normally distributed and why/why not
-- [ ] Standardize and normalize the attributes (as appropriate)
-- [ ] Analyze correlations among attributes and with the target; provide numerical and visual results (plots)
-- [ ] Identify a few important attributes; do not use all attributes blindly
-- [ ] Split the data into training and testing parts (choose and state the ratio)
+- [x] Load data into a pandas DataFrame from a public URL (remember to use public URLs to read the file)
+- [x] Check for null values, missing data, and inconsistencies; handle them
+- [x] Examine attributes and the target; convert categorical attributes to numeric if needed
+- [x] Output summaries of the attributes; note whether attributes are normally distributed and why/why not
+- [x] Standardize and normalize the attributes (as appropriate)
+- [x] Analyze correlations among attributes and with the target; provide numerical and visual results (plots)
+- [x] Identify a few important attributes; do not use all attributes blindly
+- [x] Split the data into training and testing parts (choose and state the ratio)
 
 #### 2.2 Model Construction
 - [ ] Model 1: Stochastic Gradient Descent using `SGDRegressor` (scikit‑learn)
