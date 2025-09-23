@@ -88,3 +88,32 @@ Using only two features – ambient temperature and relative humidity – achiev
   [1], [relative_humidity], [0.1493], [1.00], [1.0], [True], [True],
 )
 
+== Ordinary Least Squares
+
+== Stochastic Gradient Descent (SGD)
+
+=== Hyperparameter Search
+
+We ran a grid search to find the hyperparameters for our SGD model. It tracks the R^2, root mean squared error, and mean absolute error of each combination, but only picks the best combination based on R^2. It also uses early stopping.
+
+For each hyperparameter combination tested, we ran 15 cross-validation folds, for which we split the data into 80% training and 20% validation.
+
+#table(
+  columns: 2,
+  [*Hyperparameter*], [*Options*],
+  [Learning Rate], [constant, optimal, adaptive],
+  [Penalty], [l2, l1, elasticnet],
+  [Alpha], [0.0008, 0.001, 0.002, 0.005, 0.008, 0.01, 0.015, 0.02],
+  [eta0], [0.0002, 0.0004, 0.0005, 0.001, 0.005, 0.01],
+)
+
+#figure(
+  image("src/images/sgd-hyperparameter-analysis.png", width: 80%),
+  caption: [
+    SGD hyperparameter analysis.
+  ],
+)
+
+The best hyperparameters found were ...
+
+=== Model Evaluation
