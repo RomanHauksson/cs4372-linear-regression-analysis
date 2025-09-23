@@ -130,30 +130,148 @@ Based on preprocessing analysis, 5 trustworthy feature combinations identified:
 - **Coefficient interpretability** (20%)
 - **Model parsimony** (AIC penalty) (10%)
 
-## Implementation Priorities
 
-### Phase 1: Data Preparation
-1. Ensure standardization pipeline is robust
-2. Implement 3-fold CV framework
-3. Set up comprehensive logging system
+### Deep Understanding: OLS for Power Plant Analysis
 
-### Phase 2: SGD Implementation
-1. Grid search with early stopping
-2. Performance tracking across all metrics
-3. Hyperparameter frequency analysis
-4. Final model recommendation based on stability + performance
+1. What OLS Actually Does (The Big Picture)
 
-### Phase 3: OLS Implementation
-1. Feature combination evaluation
-2. Comprehensive diagnostic testing
-3. Residual analysis and assumption validation
-4. Final model selection with statistical justification
+Ordinary Least Squares finds the best linear relationship between power plant
+operating conditions and electrical output:
 
-### Phase 4: Model Comparison
-1. Performance comparison on common test set
-2. Residual analysis comparison
-3. Interpretability assessment
-4. Final recommendations for practical use
+Power Output = β₀ + β₁(Temperature) + β₂(Vacuum) + β₃(Pressure) + β₄(Humidity) + ε
+
+The Goal: Understand how much each operating condition affects power generation and       
+why.
+
+---
+2. Key Assignment Requirements & Their Meaning
+
+From Instructions: "Interpret ALL diagnostics"
+
+The assignment emphasizes interpretation over computation. You need to explain what       
+each number means for power plant operations.
+
+---
+3. OLS Statistical Diagnostics Explained
+
+A. Coefficients (β values)
+
+What: The actual effect size of each variable
+Power Plant Meaning:
+- β₁ = -14.7 → Every 1°C increase in temperature decreases power output by 14.7 MW        
+- β₂ = +5.2 → Every 1 cm Hg increase in vacuum increases power output by 5.2 MW
+
+Why This Matters: Plant operators can quantify the impact of environmental changes.       
+
+B. Standard Errors (SE)
+
+What: Uncertainty in our coefficient estimates
+Interpretation:
+- Small SE = precise estimate (reliable for decision-making)
+- Large SE = uncertain estimate (risky for operational decisions)
+
+C. t-values & p-values
+
+What: Statistical significance tests
+Power Plant Meaning:
+- p < 0.05: This effect is real - not just random noise
+- p > 0.05: This effect might be coincidental - don't base operations on it
+
+Critical for Assignment: You must identify which factors reliably affect power output.    
+
+D. R-squared (R²)
+
+What: Percentage of power output variation explained by our model
+Example: R² = 0.92 → Our model explains 92% of why power output varies
+Business Impact: High R² means predictable operations - you can forecast output
+reliably.
+
+E. Adjusted R-squared
+
+What: R² penalized for adding too many variables
+Why Important: Prevents false complexity - ensures we're not adding useless variables     
+just to boost R².
+
+F. F-statistic & F p-value
+
+What: Tests if the entire model is meaningful
+Interpretation:
+- High F, low p: The model as a whole is statistically valid
+- Low F, high p: The model is useless - none of the variables matter
+
+---
+4. Multicollinearity Diagnostics (OLS-Specific)
+
+A. VIF (Variance Inflation Factor)
+
+What: Measures how much variables overlap in their information
+Power Plant Example:
+- VIF = 1: Independent - temperature tells us nothing about vacuum
+- VIF = 5: Correlated - temperature and vacuum move together
+- VIF > 10: Redundant - measuring almost the same thing
+
+Operational Impact: High VIF means you can't isolate individual effects - dangerous       
+for control decisions.
+
+B. Condition Number
+
+What: Numerical stability of the solution
+Why Critical: High condition numbers mean unreliable coefficients - small data changes    
+cause big coefficient changes.
+
+---
+5. Residual Diagnostics (Model Validity)
+
+A. Jarque-Bera Test (Normality)
+
+What: Tests if prediction errors are normally distributed
+Power Plant Meaning:
+- Normal residuals: Model captures the main patterns, only random noise remains
+- Non-normal residuals: Model misses systematic patterns - there's hidden structure       
+
+B. Breusch-Pagan Test (Heteroscedasticity)
+
+What: Tests if prediction errors have constant variance
+Operational Meaning:
+- Homoscedastic: Model works equally well across all operating ranges
+- Heteroscedastic: Model is unreliable in some operating conditions
+
+C. Durbin-Watson Test (Autocorrelation)
+
+What: Tests if prediction errors are independent
+Time Series Context: In power plants, this catches time-dependent patterns the model      
+missed.
+
+---
+6. Why This Matters for Power Plant Operations
+
+Practical Applications:
+
+1. Capacity Planning: "If temperature rises 5°C, we lose 73.5 MW capacity"
+2. Efficiency Optimization: "Focus on vacuum control - biggest impact per unit effort"    
+3. Predictive Maintenance: "High residuals indicate equipment degradation"
+4. Economic Analysis: "Temperature effects cost $X per degree in lost revenue"
+
+Statistical Reliability:
+
+- High p-values: Don't make operational decisions based on this variable
+- High VIF: Can't trust individual effects - need different variable set
+- Failed residual tests: Model may be systematically wrong in some conditions
+
+---
+7. Assignment Success Criteria
+
+Your OLS analysis must:
+
+✅ Identify which variables reliably affect power output (p-values)
+✅ Quantify the magnitude of each effect (coefficients)✅ Assess prediction 
+reliability (R², residual tests)
+✅ Check for statistical problems (VIF, condition number)
+✅ Provide business interpretation - what does this mean for plant operations?
+
+The key insight: OLS isn't just about fitting lines - it's about understanding the        
+physics and economics of power generation through statistical evidence.
+
 
 ## Key Success Factors
 
