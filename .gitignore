@@ -16,3 +16,4 @@ desktop.ini
 # Typst cache (keeps PDFs tracked)
 .typst/
 
+report.pdf
