@@ -6,9 +6,13 @@ Roman Hauksson-Neill
 
 Ivan Masyuk
 
+== Introduction
+
 We chose to analyze a dataset called "Combined Cycle Power Plant", which contains readings of temperature, pressure, relative humidity, and exhaust vacuum of a power plant, which can be used to predict its net hourly electrical energy output.
 
-== Pre-processing
+== Pre-Processing
+
+=== Normality Analysis
 
 Running the Shapiro-Wilk test on the features, we found that all features are non-normal.
 
@@ -38,7 +42,7 @@ Each of the features has a totally different unit and scale. We standardized the
   ],
 )
 
-== Correlation Analysis
+=== Correlation Analysis
 
 Correlation analysis showed that the target variable (power output) is strongly correlated with the ambient temperature and vacuum features, and the ambient temperature and vacuum features are strongly correlated with each other.
 
@@ -58,22 +62,29 @@ Correlation analysis showed that the target variable (power output) is strongly 
   ],
 )
 
-== Feature selection
+=== Feature Selection
 
-Using a simple forward selection approach, we found that the best feature combination is ambient_temp, vacuum, ambient_pressure, and relative_humidity, with a test R² of 0.9284.
+We tested every possible combination of features to use in an OLS model and found that including every feature in our model achieved the best test $R^2$ value of 0.9284. However, its maximium variance inflation factor was 5.89, which is above the threshold of 5, indicating that it's an untrustworthy combination of features.
+
+Using only two features – ambient temperature and relative humidity – achieves an $R^2$ of 0.9204 and a maximum variance inflation factor of 1.41.
 
 #table(
-  columns: 3,
-  [Features], [Test R²], [Combination],
-  [ambient_temp, vacuum, ambient_pressure, relative_humidity], [0.9284], [4 features],
-  [ambient_temp, vacuum, relative_humidity], [0.9282], [3 features],
-  [ambient_temp, ambient_pressure, relative_humidity], [0.9209], [3 features],
-  [ambient_temp, relative_humidity], [0.9209], [2 features],
-  [ambient_temp, vacuum, ambient_pressure], [0.9179], [3 features],
-  [ambient_temp, vacuum], [0.9164], [2 features],
-  [ambient_temp, ambient_pressure], [0.9013], [2 features],
-  [ambient_temp], [0.9000], [1 features],
-  [vacuum, ambient_pressure, relative_humidity], [0.8106], [3 features],
-  [vacuum, ambient_pressure], [0.7960], [2 features],
+  columns: 7,
+  [Number of Features], [Features], [$R^2$], [VIF], [Condition Number], [Trustworthy?], [All features significant?],
+  [4], [ambient_temp, vacuum, ambient_pressure, relative_humidity], [0.9284], [5.89], [4.8], [False], [True],
+  [3], [ambient_temp, vacuum, relative_humidity], [0.9281], [4.88], [4.3], [True], [True],
+  [3], [ambient_temp, ambient_pressure, relative_humidity], [0.9205], [2.01], [2.4], [True], [True],
+  [2], [ambient_temp, relative_humidity], [0.9204], [1.41], [1.8], [True], [True],
+  [3], [ambient_temp, vacuum, ambient_pressure], [0.9177], [3.81], [3.8], [True], [True],
+  [2], [ambient_temp, vacuum], [0.9154], [3.41], [3.4], [True], [True],
+  [2], [ambient_temp, ambient_pressure], [0.9001], [1.35], [1.7], [True], [True],
+  [1], [ambient_temp], [0.8981], [1.00], [1.0], [True], [True],
+  [3], [vacuum, ambient_pressure, relative_humidity], [0.8021], [1.32], [1.7], [True], [True],
+  [2], [vacuum, ambient_pressure], [0.7841], [1.21], [1.6], [True], [True],
+  [2], [vacuum, relative_humidity], [0.7692], [1.10], [1.4], [True], [True],
+  [1], [vacuum], [0.7530], [1.00], [1.0], [True], [True],
+  [2], [ambient_pressure, relative_humidity], [0.3848], [1.01], [1.1], [True], [True],
+  [1], [ambient_pressure], [0.2698], [1.00], [1.0], [True], [True],
+  [1], [relative_humidity], [0.1493], [1.00], [1.0], [True], [True],
 )
 
