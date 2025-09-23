@@ -94,9 +94,9 @@ Using only two features – ambient temperature and relative humidity – achiev
 
 === Hyperparameter Search
 
-We ran a grid search to find the hyperparameters for our SGD model. It tracks the R^2, root mean squared error, and mean absolute error of each combination, but only picks the best combination based on R^2. It also uses early stopping.
+We ran grid search to find the hyperparameters for our SGD model. It tracks the R^2, root mean squared error, and mean absolute error of each combination, but only picks the best combination based on R^2. It also uses early stopping.
 
-For each hyperparameter combination tested, we ran 15 cross-validation folds, for which we split the data into 80% training and 20% validation.
+We used repeated random sub-sampling validation to evaluate the performance of each combination, using 15 folds and a test size of 20%.
 
 #table(
   columns: 2,
@@ -108,12 +108,31 @@ For each hyperparameter combination tested, we ran 15 cross-validation folds, fo
 )
 
 #figure(
-  image("src/images/sgd-hyperparameter-analysis.png", width: 80%),
+  image("src/images/sgd-hyperparameters-performance.png", width: 80%),
   caption: [
     SGD hyperparameter analysis.
   ],
 )
 
-The best hyperparameters found were ...
+#figure(
+  image("src/images/sgd-hyperparameters-interactions.png", width: 80%),
+  caption: [
+    SGD hyperparameter interactions.
+  ],
+)
 
-=== Model Evaluation
+The best combination of hyperparameters achieved a cross-validation $R^2$ of 0.9279.
+
+#figure(
+  table(
+    columns: 2,
+    [*Hyperparameter*], [*Value*],
+    [Learning Rate], [adaptive],
+    [Penalty], [l1],
+    [Alpha], [0.0008],
+    [eta0], [0.005],
+  ),
+  caption: [
+    SGD hyperparameter values for the best combination.
+  ],
+)
