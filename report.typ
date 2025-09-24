@@ -96,8 +96,6 @@ Using only two features – ambient temperature and relative humidity – achiev
   [1], [relative_humidity], [0.1493], [1.00], [1.0], [True], [True],
 )
 
-== Ordinary Least Squares
-
 == Stochastic Gradient Descent (SGD)
 
 === Hyperparameter Search
@@ -144,3 +142,56 @@ The best combination of hyperparameters achieved a cross-validation $R^2$ of 0.9
     SGD hyperparameter values for the best combination.
   ],
 )
+
+== Ordinary Least Squares (OLS)
+
+> For the OLS library of statsmodels, you will need to output the model summary and
+interpret and explain all of the output diagnostics, such as coef, standard error, t-value,
+p-value, R-squared, R-squared adjusted, F-statistic, etc
+
+==
+
+== Assumption Testing
+
+We executed a variety of tests to see whether the theoretical assumptions behind using an OLS model hold for this dataset.
+
+*Linearity*: running the RESET test on our model showed that a linear model is not adequate to predict the target variable, and adding non-linear terms significantly improves the model (F-statistic = 417.7905, p-value $approx$ 0.0000).
+
+*Multicollinearity*: The following table shows the variance inflation factors (VIF) for each feature.
+
+#table(
+  columns: 3,
+  table.header([*Feature*], [*VIF*], [*Interpretation*]),
+  [Ambient Temperature], [5.89], [Problematic],
+  [Vacuum], [3.87], [Acceptable],
+  [ambient_pressure], [1.46], [Excellent],
+  [relative_humidity], [1.71], [Excellent],
+)
+
+The condition number is 4.83, which demonstrates strong numerical stability.
+
+*Residual normality*: running the Jarque-Bera Test showed that the residuals are not normally distributed.
+
+*Heteroscedasticity*: Running the Breusch-Pagan Test resulted in an LM statistic of 30.5727 and a p-value of 0.0000. This means that the heteroscedasticity assumption (that error vaiance is not dependent on the fitted values) is violated.
+
+*Autocorrelation*: Running the Durbin-Watson Test resulted in a DW statistic of 2.0112, which means that there is no significant autocorrelation in the residuals.
+
+== Reconciling Assumption Violations
+
+== Model Comparison
+
+#image(
+  image("src/images/comprehensive_ols_diagnostics.png", width: 80%),
+  caption: [
+    Comprehensive OLS diagnostics.
+  ],
+)
+
+#image(
+  image("src/images/ols-model-comparison.png", width: 80%),
+  caption: [
+    OLS model comparison.
+  ],
+)
+
+= Conclusion
