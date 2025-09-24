@@ -18,7 +18,7 @@ Running the Shapiro-Wilk test on the features, we found that all features are no
 
 #table(
   columns: 3,
-  [Feature], [p-value], [Normality],
+  table.header([Feature], [p-value], [Normality]),
   [ambient_temp], [2.10e-30], [Non-normal],
   [vacuum], [6.40e-48], [Non-normal],
   [ambient_pressure], [5.96e-12], [Non-normal],
@@ -48,7 +48,7 @@ Correlation analysis showed that the target variable (power output) is strongly 
 
 #table(
   columns: 3,
-  [Feature], [Correlation], [Direction],
+  table.header([*Feature*], [*Correlation*], [*Direction*]),
   [ambient_temp], [-0.948], [Negative],
   [vacuum], [-0.870], [Negative],
   [ambient_pressure], [+0.519], [Positive],
@@ -70,7 +70,15 @@ Using only two features – ambient temperature and relative humidity – achiev
 
 #table(
   columns: 7,
-  [Number of Features], [Features], [$R^2$], [VIF], [Condition Number], [Trustworthy?], [All features significant?],
+  table.header(
+    [*Number of Features*],
+    [*Features*],
+    [*$R^2$*],
+    [*VIF*],
+    [*Condition Number*],
+    [*Trustworthy?*],
+    [*All features significant?*],
+  ),
   [4], [ambient_temp, vacuum, ambient_pressure, relative_humidity], [0.9284], [5.89], [4.8], [False], [True],
   [3], [ambient_temp, vacuum, relative_humidity], [0.9281], [4.88], [4.3], [True], [True],
   [3], [ambient_temp, ambient_pressure, relative_humidity], [0.9205], [2.01], [2.4], [True], [True],
@@ -100,7 +108,7 @@ We used repeated random sub-sampling validation to evaluate the performance of e
 
 #table(
   columns: 2,
-  [*Hyperparameter*], [*Options*],
+  table.header([*Hyperparameter*], [*Options*]),
   [Learning Rate], [constant, optimal, adaptive],
   [Penalty], [l2, l1, elasticnet],
   [Alpha], [0.0008, 0.001, 0.002, 0.005, 0.008, 0.01, 0.015, 0.02],
@@ -126,7 +134,7 @@ The best combination of hyperparameters achieved a cross-validation $R^2$ of 0.9
 #figure(
   table(
     columns: 2,
-    [*Hyperparameter*], [*Value*],
+    table.header([*Hyperparameter*], [*Value*]),
     [Learning Rate], [adaptive],
     [Penalty], [l1],
     [Alpha], [0.0008],
